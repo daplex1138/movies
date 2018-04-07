@@ -36,7 +36,7 @@ public class MovieController {
 	public ModelAndView processNewDirector(Director director) {
 		ModelAndView modelAndView = new ModelAndView();
 		directorDao.insert(director);
-		modelAndView.setViewName("newDirectorResult");
+		modelAndView.setViewName("addDirector");
 		modelAndView.addObject("message", Definitions.SUCCESS_MESSAGE);
 
 		return modelAndView;
@@ -66,7 +66,7 @@ public class MovieController {
 	public ModelAndView processNewMovie(Movie movie) {
 		ModelAndView modelAndView = new ModelAndView();
 		movieDao.insert(movie);
-		modelAndView.setViewName("newDirectorResult");
+		modelAndView.setViewName("addMovie");
 		modelAndView.addObject("message", Definitions.SUCCESS_MESSAGE);
 
 		return modelAndView;
