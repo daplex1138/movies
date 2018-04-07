@@ -3,7 +3,9 @@ package tests;
 import java.util.List;
 
 import dao.DirectorDAO;
+import dao.MovieDAO;
 import model.Director;
+import model.Movie;
 
 public class DAOTests {
 
@@ -23,22 +25,55 @@ public class DAOTests {
 		directorDao.insert(director4);
 		directorDao.insert(director5);
 		
+		// Correcting/updating a director
+		director5.setGender("MALE");
+		directorDao.update(director5);
+		
 		// Print directors from DB
 		System.out.println("---------- Directors in DB ----------");
 		List <Director> directorList = directorDao.getAll();
 		for(Director director : directorList) {
 			System.out.println(director.toString());
+		}			
+		
+		// Create and inserting movies
+		Movie movie1 = new Movie("Ready Player One", "2018", "PG-13", "sci-fi", 140, director1);
+		Movie movie2 = new Movie("Schindlers List", "1993", "R", "Drama", 195, director1);
+		Movie movie3 = new Movie("The Last Jedi", "2017", "PG-13", "Sci-fi", 150, director2);
+		Movie movie4 = new Movie("Selma", "2014", "PG-13", "drama", 168, director3);
+		Movie movie5 = new Movie("The Birds", "1963", "PG-13", "PG-13", 120, director4);
+		
+		MovieDAO movieDao = new MovieDAO();
+		movieDao.insert(movie1);
+		movieDao.insert(movie2);
+		movieDao.insert(movie3);
+		movieDao.insert(movie4);
+		movieDao.insert(movie5);
+		
+		// Print movies from DB
+		System.out.println("---------- Movies in DB ----------");
+		List <Movie> movieList = movieDao.getAll();
+		for(Movie movie : movieList) {
+			System.out.println(movie.toString());
 		}
 		
-		// Correcting/updating a director
-		director5.setGender("MALE");
-		directorDao.update(director5);
-		System.out.println("---------- Correcting director information ----------");
-		directorList = directorDao.getAll();
-		for(Director director : directorList) {
-			System.out.println(director.toString());
+		// Find a single director by ID.
+		Director directorSingleResult = directorDao.searchForDirectorById(directorList.get(directorList.size() - 1).getId());
+		System.out.println("---------- Find a single Director by ID ----------");
+		System.out.println(directorSingleResult.toString());
+		
+		// Find a single movie by ID.
+		Movie movieSingleResult = movieDao.searchForMovieById(movieList.get(movieList.size() - 1).getId());
+		System.out.println("---------- Find a single Director by ID ----------");
+		System.out.println(movieSingleResult.toString());
+		
+		// Deletes all movies
+		System.out.println("\n---------- Deleting all movies ----------");
+		for(Movie movie : movieList) {
+			movieDao.delete(movie);
 		}
-			
+		System.out.println("--------------------> Movies Deleted");
+		
 		// Deletes all directors
 		System.out.println("---------- Deleting all directors ----------");
 		for(Director director : directorList) {

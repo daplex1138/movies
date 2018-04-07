@@ -50,7 +50,7 @@ public class MovieDAO {
 		em.close();
 	}
 	
-	public Movie searchForDirectorById(int id) {
+	public Movie searchForMovieById(int id) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		Movie result = em.find(Movie.class, id);
