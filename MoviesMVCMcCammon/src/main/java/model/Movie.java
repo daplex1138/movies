@@ -21,21 +21,21 @@ public class Movie {
 	private int duration;
 	@ManyToOne
 	@JoinColumn (name = "director_id")
-	private int directorId;
+	private Director director;
 	
 	public Movie() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Movie(String title, String year, String rating, String genre, int duration, int directorId) {
+	public Movie(String title, String year, String rating, String genre, int duration, Director director) {
 		super();
 		this.title = title;
 		this.year = year;
 		this.rating = rating;
 		this.genre = genre;
 		this.duration = duration;
-		this.directorId = directorId;
+		this.director = director;
 	}
 
 	public String getTitle() {
@@ -78,12 +78,12 @@ public class Movie {
 		this.duration = duration;
 	}
 
-	public int getDirectorId() {
-		return directorId;
+	public Director getDirector() {
+		return director;
 	}
 
-	public void setDirectorId(int directorId) {
-		this.directorId = directorId;
+	public void setDirectorId(Director director) {
+		this.director = director;
 	}
 
 	public int getId() {
@@ -93,6 +93,6 @@ public class Movie {
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", title=" + title + ", year=" + year + ", rating=" + rating + ", genre=" + genre
-				+ ", duration=" + duration + ", directorId=" + directorId + "]";
+				+ ", duration=" + duration + ", directorId=" + director + "]";
 	}
 }

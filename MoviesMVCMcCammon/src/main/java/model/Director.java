@@ -26,9 +26,12 @@ public class Director {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-		this.gender = gender;
+		this.setGender(gender);
 	}
 	
+	public int getId() {
+		return id;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -51,10 +54,13 @@ public class Director {
 		return gender;
 	}
 	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public int getId() {
-		return id;
+		final String INVALID_GENDER = "unknown";
+		
+		if (gender.toLowerCase().equals("male") || gender.toLowerCase().equals("female")) {
+			this.gender = gender.toLowerCase();
+		} else {
+			this.gender = INVALID_GENDER;
+		}
 	}
 	@Override
 	public String toString() {
