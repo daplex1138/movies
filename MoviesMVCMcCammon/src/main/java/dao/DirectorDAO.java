@@ -22,7 +22,7 @@ public class DirectorDAO {
 	public List<Director> getAll() {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		String query = "select d from director d";
+		String query = "select d from Director d";
 		TypedQuery<Director> typedQuery = em.createQuery(query, Director.class);
 		List<Director> all = typedQuery.getResultList();
 		
