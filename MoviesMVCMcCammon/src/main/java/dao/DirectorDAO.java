@@ -28,4 +28,34 @@ public class DirectorDAO {
 		
 		return all;
 	}
+	
+	public void delete(Director toDelete) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Director> typedQuery = em.createQuery("SELECT d FROM Director d WHERE d.id = :selectedId", Director.class);
+		typedQuery.setParameter("selectedId", toDelete.getId());
+		typedQuery.setMaxResults(1);
+		Director result = typedQuery.getSingleResult();
+		em.remove(result);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void update(Director toEdit) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(toEdit);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public Director searchForDirectorById(int id) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		Director result = em.find(Director.class, id);
+		em.close();
+		
+		return result;
+	}
+	
 }

@@ -29,4 +29,33 @@ public class MovieDAO {
 		
 		return all;
 	}
+	
+	public void delete(Movie toDelete) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		TypedQuery<Movie> typedQuery = em.createQuery("SELECT m FROM Movie m WHERE m.id = :selectedId", Movie.class);
+		typedQuery.setParameter("selectedId", toDelete.getId());
+		typedQuery.setMaxResults(1);
+		Movie result = typedQuery.getSingleResult();
+		em.remove(result);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public void update(Movie toEdit) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(toEdit);
+		em.getTransaction().commit();
+		em.close();
+	}
+	
+	public Movie searchForDirectorById(int id) {
+		EntityManager em = emfactory.createEntityManager();
+		em.getTransaction().begin();
+		Movie result = em.find(Movie.class, id);
+		em.close();
+		
+		return result;
+	}
 }
