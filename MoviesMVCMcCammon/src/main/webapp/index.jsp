@@ -1,5 +1,6 @@
 <html>
 <body>
-<% response.sendRedirect("form.mvc"); %>
+<a href = "newDirector.mvc">New Director</a>
+<a href = "newMovie.mvc">New Director</a>
 </body>
 </html>
