@@ -46,7 +46,7 @@ public class MovieController {
 	public ModelAndView viewDirector(Director director) {
 		ModelAndView modelAndView = new ModelAndView();
 		List<Director> allDirectors = directorDao.getAll();
-		modelAndView.setViewName("viewDirectors");
+		modelAndView.setViewName("viewAllDirectors");
 		modelAndView.addObject("allDirectors", allDirectors);
 		
 		return modelAndView;
