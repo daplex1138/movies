@@ -1,3 +1,4 @@
 *.classpath
 MANIFEST.MF
 pom.properties
+/target
