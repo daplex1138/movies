@@ -1,17 +1,16 @@
-package dao;
+package comboPackage;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import model.Director;
-
-public class DirectorDAO {
+public class MovieDAO {
 	EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("MoviesMVCMcCammon");
 	
-	public void insert(Director toAdd) {
+	public void insert(Movie toAdd) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(toAdd);
@@ -19,29 +18,29 @@ public class DirectorDAO {
 		em.close();
 	}
 	
-	public List<Director> getAll() {
+	public List<Movie> getAll() {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		String query = "select d from Director d";
-		TypedQuery<Director> typedQuery = em.createQuery(query, Director.class);
-		List<Director> all = typedQuery.getResultList();
+		String query = "select m from Movie m";
+		TypedQuery<Movie> typedQuery = em.createQuery(query, Movie.class);
+		List<Movie> all = typedQuery.getResultList();
 		
 		return all;
 	}
 	
-	public void delete(Director toDelete) {
+	public void delete(Movie toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Director> typedQuery = em.createQuery("SELECT d FROM Director d WHERE d.id = :selectedId", Director.class);
+		TypedQuery<Movie> typedQuery = em.createQuery("SELECT m FROM Movie m WHERE m.id = :selectedId", Movie.class);
 		typedQuery.setParameter("selectedId", toDelete.getId());
 		typedQuery.setMaxResults(1);
-		Director result = typedQuery.getSingleResult();
+		Movie result = typedQuery.getSingleResult();
 		em.remove(result);
 		em.getTransaction().commit();
 		em.close();
 	}
 	
-	public void update(Director toEdit) {
+	public void update(Movie toEdit) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(toEdit);
@@ -49,13 +48,12 @@ public class DirectorDAO {
 		em.close();
 	}
 	
-	public Director searchForDirectorById(int id) {
+	public Movie searchForMovieById(int id) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		Director result = em.find(Director.class, id);
+		Movie result = em.find(Movie.class, id);
 		em.close();
 		
 		return result;
 	}
-	
 }

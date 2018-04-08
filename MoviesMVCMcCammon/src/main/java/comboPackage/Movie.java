@@ -1,4 +1,4 @@
-package model;
+package comboPackage;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

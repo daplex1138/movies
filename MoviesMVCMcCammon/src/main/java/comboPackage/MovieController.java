@@ -1,6 +1,7 @@
-package controller;
+package comboPackage;
 
 import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import dao.DirectorDAO;
-import dao.MovieDAO;
-import edu.dmacc.spring.springmvc.Car;
-import model.Definitions;
-import model.Director;
-import model.Movie;
 
 @Controller
 public class MovieController {
@@ -41,7 +35,7 @@ public class MovieController {
 
 		return modelAndView;
 	}
-	.
+	
 	@RequestMapping(value = "/viewDirectors")
 	public ModelAndView viewDirector(Director director) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -54,15 +48,19 @@ public class MovieController {
 	
 	@RequestMapping(value = "/newMovie")
 	public ModelAndView newMovie(Movie movie) {
+		Arrays.sort(Definitions.RATINGS);
+		Arrays.sort(Definitions.GENRES);
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("addMovie");
 		modelAndView.addObject("movie", new Movie());
+		modelAndView.addObject("ratings", Definitions.RATINGS);
+		modelAndView.addObject("genres", Definitions.GENRES);
 
 		return modelAndView;
 	}
 	
-	// Point the action of the new director form here.
-	@RequestMapping(value = "/newDirectorResult")
+	// Point the action of the new Movie form here.
+	@RequestMapping(value = "/newMovieResult")
 	public ModelAndView processNewMovie(Movie movie) {
 		ModelAndView modelAndView = new ModelAndView();
 		movieDao.insert(movie);
@@ -72,7 +70,6 @@ public class MovieController {
 		return modelAndView;
 	}
 	
-	// Point the action of the add director form here.
 	@RequestMapping(value = "/viewMovies")
 	public ModelAndView viewMovies(Movie movie) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -84,7 +81,7 @@ public class MovieController {
 	}
 	
 	@Bean
-	public DirectorDAO directorDal() {
+	public DirectorDAO directorDao() {
 		DirectorDAO bean = new DirectorDAO();
 		return bean;
 	}

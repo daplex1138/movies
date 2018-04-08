@@ -1,11 +1,6 @@
-package tests;
+package comboPackage;
 
 import java.util.List;
-
-import dao.DirectorDAO;
-import dao.MovieDAO;
-import model.Director;
-import model.Movie;
 
 public class DAOTests {
 
