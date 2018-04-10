@@ -1,7 +1,7 @@
 package comboPackage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-//import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +48,24 @@ public class MovieController {
 	
 	@RequestMapping(value = "/newMovie")
 	public ModelAndView newMovie(Movie movie) {
+		List<Director> allDirectors = directorDao.getAll();
+		int count = allDirectors.size();
+		String[] dirArray = new String[count];
+		
 		Arrays.sort(Definitions.RATINGS);
 		Arrays.sort(Definitions.GENRES);
+		int i = 0;
+		for(Director director : allDirectors) {
+			dirArray[i] = director.getFirstName() + " " + director.getLastName();
+			i++;
+		}
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("addMovie");
 		modelAndView.addObject("movie", new Movie());
 		modelAndView.addObject("ratings", Definitions.RATINGS);
 		modelAndView.addObject("genres", Definitions.GENRES);
+		modelAndView.addObject("allDirectors", dirArray);
 
 		return modelAndView;
 	}

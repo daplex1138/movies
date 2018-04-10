@@ -33,7 +33,7 @@
 	    </tr>
 	     <tr>
 	        <td><mvc:label path="director">Director</mvc:label></td>
-	        <td><mvc:select path="director" items="${director}"/></td>
+	        <td><mvc:select path="director" items="${allDirectors}"/></td>
 	    </tr>
         <tr>
 	        <td colspan="2">
