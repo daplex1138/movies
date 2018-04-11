@@ -1,5 +1,4 @@
 package comboPackage;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,6 +42,9 @@ public class Director {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
 	}
 	public String getAddress() {
 		return address;
