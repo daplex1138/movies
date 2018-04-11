@@ -2,7 +2,10 @@ package comboPackage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -48,24 +51,22 @@ public class MovieController {
 	
 	@RequestMapping(value = "/newMovie")
 	public ModelAndView newMovie(Movie movie) {
-		List<Director> allDirectors = directorDao.getAll();
-		int count = allDirectors.size();
-		String[] dirArray = new String[count];
+		List<Director> directorList = directorDao.getAll();
+		Map<Integer, String> directorMap = new LinkedHashMap<Integer,String>();
+		
+		for(Director director : directorList) {
+			directorMap.put(director.getId(), director.getFirstName() + " " + director.getLastName());
+		}
 		
 		Arrays.sort(Definitions.RATINGS);
 		Arrays.sort(Definitions.GENRES);
-		int i = 0;
-		for(Director director : allDirectors) {
-			dirArray[i] = director.getFirstName() + " " + director.getLastName();
-			i++;
-		}
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("addMovie");
 		modelAndView.addObject("movie", new Movie());
 		modelAndView.addObject("ratings", Definitions.RATINGS);
 		modelAndView.addObject("genres", Definitions.GENRES);
-		modelAndView.addObject("allDirectors", dirArray);
+		modelAndView.addObject("allDirectors", directorMap);
 
 		return modelAndView;
 	}
