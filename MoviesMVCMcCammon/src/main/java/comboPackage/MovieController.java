@@ -49,13 +49,7 @@ public class MovieController {
 	
 	@RequestMapping(value = "/newMovie")
 	public ModelAndView newMovie(Movie movie) {
-		List<Director> directorList = directorDao.getAll();
-		Map<Integer, String> directorMap = new LinkedHashMap<Integer,String>();
-		
-		for(Director director : directorList) {
-			directorMap.put(director.getId(), director.getFirstName() + " " + director.getLastName());
-		}
-		
+		List<Director> directorList = directorDao.getAll();	
 		Arrays.sort(Definitions.RATINGS);
 		Arrays.sort(Definitions.GENRES);
 
@@ -64,7 +58,7 @@ public class MovieController {
 		modelAndView.addObject("movie", new Movie());
 		modelAndView.addObject("ratings", Definitions.RATINGS);
 		modelAndView.addObject("genres", Definitions.GENRES);
-		modelAndView.addObject("allDirectors", directorMap);
+		modelAndView.addObject("allDirectors", directorList);
 
 		return modelAndView;
 	}
