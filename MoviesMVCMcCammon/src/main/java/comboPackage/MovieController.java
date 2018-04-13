@@ -1,9 +1,9 @@
 package comboPackage;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -65,8 +65,11 @@ public class MovieController {
 	
 	// Point the action of the new Movie form here.
 	@RequestMapping(value = "/newMovieResult")
-	public ModelAndView processNewMovie(Movie movie) {
+	public ModelAndView processNewMovie(Movie movie, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("director"));
+		Director director = directorDao.searchForDirectorById(id);
+		movie.setDirectorId(director);
 		movieDao.insert(movie);
 		modelAndView.setViewName("addMovie");
 		modelAndView.addObject("message", Definitions.SUCCESS_MESSAGE);
