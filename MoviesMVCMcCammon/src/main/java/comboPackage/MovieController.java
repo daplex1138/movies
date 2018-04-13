@@ -31,8 +31,8 @@ public class MovieController {
 	public ModelAndView processNewDirector(Director director) {
 		ModelAndView modelAndView = new ModelAndView();
 		directorDao.insert(director);
-		modelAndView.setViewName("addDirector");
-		modelAndView.addObject("message", Definitions.SUCCESS_MESSAGE);
+		changeToDirectorViewAll(modelAndView);
+
 
 		return modelAndView;
 	}
@@ -40,9 +40,7 @@ public class MovieController {
 	@RequestMapping(value = "/viewDirectors")
 	public ModelAndView viewDirector(Director director) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<Director> allDirectors = directorDao.getAll();
-		modelAndView.setViewName("viewAllDirectors");
-		modelAndView.addObject("allDirectors", allDirectors);
+		changeToDirectorViewAll(modelAndView);
 		
 		return modelAndView;
 	}
@@ -71,8 +69,7 @@ public class MovieController {
 		Director director = directorDao.searchForDirectorById(id);
 		movie.setDirectorId(director);
 		movieDao.insert(movie);
-		modelAndView.setViewName("addMovie");
-		modelAndView.addObject("message", Definitions.SUCCESS_MESSAGE);
+		changeToMovieViewAll(modelAndView);
 
 		return modelAndView;
 	}
@@ -80,9 +77,7 @@ public class MovieController {
 	@RequestMapping(value = "/viewMovies")
 	public ModelAndView viewMovies(Movie movie) {
 		ModelAndView modelAndView = new ModelAndView();
-		List<Movie> allMovies = movieDao.getAll();
-		modelAndView.setViewName("viewAllMovies");
-		modelAndView.addObject("allMovies", allMovies);
+		changeToMovieViewAll(modelAndView);
 		
 		return modelAndView;
 	}
@@ -97,5 +92,17 @@ public class MovieController {
 	public MovieDAO movieDao() {
 		MovieDAO bean = new MovieDAO();
 		return bean;
+	}
+	
+	private void changeToMovieViewAll(ModelAndView modelAndView) {
+		modelAndView.setViewName("viewAllMovies");
+		List<Movie> allMovies = movieDao.getAll();
+		modelAndView.addObject("allMovies", allMovies);
+	}
+	
+	private void changeToDirectorViewAll(ModelAndView modelAndView) {
+		modelAndView.setViewName("viewAllDirectors");
+		List<Director> allDirectors = directorDao.getAll();
+		modelAndView.addObject("allDirectors", allDirectors);
 	}
 }

@@ -13,24 +13,24 @@
 	<c:forEach items="${allMovies}" var="item">
 		<table>
 			<tr>
-				<td>Title</td>
+				<td>Title: </td>
 				<td>${item.title}</td>
 			</tr>
 			<tr>
-				<td>Year</td>
+				<td>Year: </td>
 				<td>${item.year}</td>
 			</tr>
 			<tr>
-				<td>Rating</td>
+				<td>Rating: </td>
 				<td>${item.rating}</td>
 			</tr>
 			<tr>
-				<td>Genre</td>
+				<td>Genre: </td>
 				<td>${item.genre}</td>
 			</tr>
 			<tr>
-				<td>Director</td>
-				<td>${item.director}</td>
+				<td>Director: </td>
+				<td>${item.director.fullName}</td>
 			</tr>
 			
 		</table>
