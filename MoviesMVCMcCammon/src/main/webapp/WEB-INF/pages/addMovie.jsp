@@ -9,7 +9,7 @@
 </head>
 <body>
 <h2>Add Movie</h2>
-<mvc:form modelAttribute="movie" action="newMovieResult.mvc">
+<mvc:form modelAttribute="movie" action="newMovieResult.mvc" method="POST">
 	<table>
 	    <tr>
 	        <td><mvc:label path="title">Title</mvc:label></td>
@@ -33,7 +33,7 @@
 	    </tr>
 	     <tr>
 	        <td><mvc:label path="director">Director</mvc:label></td>
-	        <td><mvc:select path="director" items="${director}"/></td>
+	        <td><mvc:select name="director" path="director" items="${allDirectors}" itemLabel="fullName" itemValue = "id"/></td>
 	    </tr>
         <tr>
 	        <td colspan="2">

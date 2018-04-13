@@ -1,8 +1,9 @@
 package comboPackage;
 
 import java.util.Arrays;
-//import java.util.Arrays;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -48,21 +49,27 @@ public class MovieController {
 	
 	@RequestMapping(value = "/newMovie")
 	public ModelAndView newMovie(Movie movie) {
+		List<Director> directorList = directorDao.getAll();	
 		Arrays.sort(Definitions.RATINGS);
 		Arrays.sort(Definitions.GENRES);
+
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("addMovie");
 		modelAndView.addObject("movie", new Movie());
 		modelAndView.addObject("ratings", Definitions.RATINGS);
 		modelAndView.addObject("genres", Definitions.GENRES);
+		modelAndView.addObject("allDirectors", directorList);
 
 		return modelAndView;
 	}
 	
 	// Point the action of the new Movie form here.
 	@RequestMapping(value = "/newMovieResult")
-	public ModelAndView processNewMovie(Movie movie) {
+	public ModelAndView processNewMovie(Movie movie, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("director"));
+		Director director = directorDao.searchForDirectorById(id);
+		movie.setDirectorId(director);
 		movieDao.insert(movie);
 		modelAndView.setViewName("addMovie");
 		modelAndView.addObject("message", Definitions.SUCCESS_MESSAGE);
