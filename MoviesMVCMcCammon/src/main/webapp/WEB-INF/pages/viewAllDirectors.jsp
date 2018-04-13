@@ -26,6 +26,14 @@
 			
 		</table>
 		<br />
+		<form action="deleteDirectorResult.mvc" method="POST">
+			<input name="directorId" type="hidden" value="${item.id}">
+			<input type="submit" value="DELETE">
+		</form>
+		<form action="editDirectorResult.mvc" method="POST">
+			<input name="directorId" type="hidden" value="${item.id}">
+			<input type="submit" value="Edit">
+		</form>
 		<hr style="text-align: left; margin-left: 0; width: 25%">
 		<br />
 	</c:forEach>

@@ -26,13 +26,11 @@ public class MovieController {
 		return modelAndView;
 	}
 	
-	// Point the action of the add director form here.
 	@RequestMapping(value = "/newDirectorResult")
 	public ModelAndView processNewDirector(Director director) {
 		ModelAndView modelAndView = new ModelAndView();
 		directorDao.insert(director);
 		changeToDirectorViewAll(modelAndView);
-
 
 		return modelAndView;
 	}
@@ -42,6 +40,49 @@ public class MovieController {
 		ModelAndView modelAndView = new ModelAndView();
 		changeToDirectorViewAll(modelAndView);
 		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/deleteDirectorResult")
+	public ModelAndView deleteDirectorDirector(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("directorId"));
+		Director result = directorDao.searchForDirectorById(id);
+		directorDao.delete(result);
+		changeToDirectorViewAll(modelAndView);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/editDirectorResult")
+	public ModelAndView editDirectorDirector(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("directorId"));
+		Director result = directorDao.searchForDirectorById(id);
+		modelAndView.setViewName("editDirector");
+		modelAndView.addObject("director", new Director());
+		modelAndView.addObject("id", result.getId());
+		modelAndView.addObject("firstName", result.getFirstName());
+		modelAndView.addObject("lastName", result.getLastName());
+		modelAndView.addObject("address", result.getAddress());
+		modelAndView.addObject("genders", Definitions.GENDERS);
+			
+		return modelAndView;
+	}
+	
+	
+/*
+* ToDo Create new controller /updateDirector
+*/	
+	
+	@RequestMapping(value = "/updateDirector")
+	public ModelAndView updateDirector(Director director, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		String gender= request.getParameter("gender");
+		System.out.println(gender);
+		//directorDao.update(director);
+		// todo: go to next page.  View all?
+
 		return modelAndView;
 	}
 	
@@ -61,7 +102,6 @@ public class MovieController {
 		return modelAndView;
 	}
 	
-	// Point the action of the new Movie form here.
 	@RequestMapping(value = "/newMovieResult")
 	public ModelAndView processNewMovie(Movie movie, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
