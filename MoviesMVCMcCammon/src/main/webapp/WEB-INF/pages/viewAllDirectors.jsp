@@ -9,8 +9,16 @@
 <title>All Directors</title>
 </head>
 <body>
+<h2>All Directors</h2>
+	<a href="newDirector.mvc">Add a new Director</a><br />
+	<a href="index.jsp">Home</a>
+	<hr style="text-align: left; margin-left: 0; width: 25%">
 	<c:forEach items="${allDirectors}" var="item">
 		<table>
+			<tr>
+				<td>ID: </td>
+				<td>${item.id}</td>
+		
 			<tr>
 				<td>Name: </td>
 				<td>${item.fullName}</td>

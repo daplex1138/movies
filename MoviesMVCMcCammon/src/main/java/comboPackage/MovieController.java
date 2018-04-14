@@ -1,6 +1,8 @@
 package comboPackage;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -177,12 +179,24 @@ public class MovieController {
 	private void changeToMovieViewAll(ModelAndView modelAndView) {
 		modelAndView.setViewName("viewAllMovies");
 		List<Movie> allMovies = movieDao.getAll();
+		Collections.sort(allMovies, new Comparator<Movie>() {
+		    public int compare(Movie a, Movie b) {
+		        // For descending order: -1 = less than, 1 = greater than, 0 = equal,
+		        return a.getId() > b.getId() ? -1 : (a.getId() < b.getId()) ? 1 : 0;
+		    }
+		});
 		modelAndView.addObject("allMovies", allMovies);
 	}
 	
 	private void changeToDirectorViewAll(ModelAndView modelAndView) {
 		modelAndView.setViewName("viewAllDirectors");
-		List<Director> allDirectors = directorDao.getAll();
+		List<Director> allDirectors = directorDao.getAll();		
+		Collections.sort(allDirectors, new Comparator<Director>() {
+		    public int compare(Director a, Director b) {
+		        // For descending order: -1 = less than, 1 = greater than, 0 = equal,
+		        return a.getId() > b.getId() ? -1 : (a.getId() < b.getId()) ? 1 : 0;
+		    }
+		});
 		modelAndView.addObject("allDirectors", allDirectors);
 	}
 }

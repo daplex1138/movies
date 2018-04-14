@@ -10,8 +10,15 @@
 </head>
 <body>
 <h2>All Movies</h2>
+	<a href="newMovie.mvc">Add a new Movie</a><br />
+	<a href="index.jsp">Home</a>
+	<hr style="text-align: left; margin-left: 0; width: 25%">
 	<c:forEach items="${allMovies}" var="item">
 		<table>
+			<tr>
+				<td>ID: </td>
+				<td>${item.id}</td>
+			</tr>
 			<tr>
 				<td>Title: </td>
 				<td>${item.title}</td>
