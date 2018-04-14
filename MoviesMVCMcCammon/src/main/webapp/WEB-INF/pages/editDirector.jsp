@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>New Director</title>
+<title>Edit Director</title>
 </head>
 <body>
-<h2>New Director</h2>
+<h2>Edit Director</h2>
 <mvc:form modelAttribute="director" action="updateDirector.mvc">
 	<table>
 	    <tr>

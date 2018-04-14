@@ -122,6 +122,46 @@ public class MovieController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "/deleteMovieResult")
+	public ModelAndView deleteMovie(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("movieId"));
+		Movie result = movieDao.searchForMovieById(id);
+		movieDao.delete(result);
+		changeToMovieViewAll(modelAndView);
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/editMovieResult")
+	public ModelAndView editMovie(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("movieId"));
+		Movie result = movieDao.searchForMovieById(id);
+		modelAndView.setViewName("editMovie");
+		modelAndView.addObject("movie", new Movie());
+		modelAndView.addObject("id", result.getId());
+		modelAndView.addObject("title", result.getTitle());
+		modelAndView.addObject("year", result.getYear());
+		modelAndView.addObject("ratings", Definitions.RATINGS);
+		modelAndView.addObject("genre", result.getGenre());modelAndView.addObject("genres", Definitions.GENRES);modelAndView.addObject("duration", result.getDuration());
+		//modelAndView.addObject("genders", Definitions.GENDERS);
+
+			
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/updateMovie")
+	public ModelAndView updateMovie(Movie movie, HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		String gender= request.getParameter("gender");
+		System.out.println(gender);
+		//directorDao.update(director);
+		// todo: go to next page.  View all?
+
+		return modelAndView;
+	}
+	
 	@Bean
 	public DirectorDAO directorDao() {
 		DirectorDAO bean = new DirectorDAO();
