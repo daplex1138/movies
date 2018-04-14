@@ -42,10 +42,6 @@
 			
 		</table>
 		<br />
-		<form action="deleteMovieResult.mvc" method="POST">
-			<input name="movieId" type="hidden" value="${item.id}">
-			<input type="submit" value="DELETE">
-		</form>
 		<hr style="text-align: left; margin-left: 0; width: 25%">
 		<br />
 	</c:forEach>

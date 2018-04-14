@@ -124,17 +124,7 @@ public class MovieController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/deleteMovieResult")
-	public ModelAndView deleteMovie(HttpServletRequest request) {
-		ModelAndView modelAndView = new ModelAndView();
-		int id = Integer.parseInt(request.getParameter("movieId"));
-		Movie result = movieDao.searchForMovieById(id);
-		movieDao.delete(result);
-		changeToMovieViewAll(modelAndView);
-		
-		return modelAndView;
-	}
-	
+
 	@Bean
 	public DirectorDAO directorDao() {
 		DirectorDAO bean = new DirectorDAO();
