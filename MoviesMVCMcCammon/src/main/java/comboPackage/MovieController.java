@@ -124,6 +124,17 @@ public class MovieController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = "/deleteMovieResult")
+	public ModelAndView deleteMovie(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("movieId"));
+		Movie result = movieDao.searchForMovieById(id);
+		movieDao.delete(result);
+		changeToMovieViewAll(modelAndView);
+		
+		return modelAndView;
+	}
+	
 	@Bean
 	public DirectorDAO directorDao() {
 		DirectorDAO bean = new DirectorDAO();
@@ -139,6 +150,12 @@ public class MovieController {
 	private void changeToMovieViewAll(ModelAndView modelAndView) {
 		modelAndView.setViewName("viewAllMovies");
 		List<Movie> allMovies = movieDao.getAll();
+		Collections.sort(allMovies, new Comparator<Movie>() {
+		    public int compare(Movie a, Movie b) {
+		        // For descending order: -1 = less than, 1 = greater than, 0 = equal,
+		        return a.getId() > b.getId() ? -1 : (a.getId() < b.getId()) ? 1 : 0;
+		    }
+		});
 		modelAndView.addObject("allMovies", allMovies);
 	}
 	
