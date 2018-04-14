@@ -61,7 +61,7 @@ public class DAOTests {
 		Movie movieSingleResult = movieDao.searchForMovieById(movieList.get(movieList.size() - 1).getId());
 		System.out.println("---------- Find a single Director by ID ----------");
 		System.out.println(movieSingleResult.toString());
-		
+		/*
 		// Deletes all movies
 		System.out.println("\n---------- Deleting all movies ----------");
 		for(Movie movie : movieList) {
@@ -75,6 +75,7 @@ public class DAOTests {
 			directorDao.delete(director);
 		}
 		System.out.println("--------------------> Directors Deleted");
+		*/
 	}
 
 }
