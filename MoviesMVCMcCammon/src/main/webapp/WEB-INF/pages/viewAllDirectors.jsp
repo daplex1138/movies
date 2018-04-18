@@ -5,15 +5,20 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="head.jsp" %>
 <title>All Directors</title>
 </head>
 <body>
+<div class="container-fluid">
 <h2>All Directors</h2>
+<div class="row">
+<div class="col-sm-6">
 	<a href="newDirector.mvc">Add a new Director</a><br />
 	<a href="index.jsp">Home</a>
 	<hr style="text-align: left; margin-left: 0; width: 25%">
 	<c:forEach items="${allDirectors}" var="item">
+	<div class="card">
+	<div class="card-body">
 		<table>
 			<tr>
 				<td>ID: </td>
@@ -34,19 +39,25 @@
 			
 		</table>
 		<br />
+		<div class="form-group">
 		<form action="deleteDirectorResult.mvc" method="POST">
 			<input name="directorId" type="hidden" value="${item.id}">
-			<input type="submit" value="DELETE">
+			<input type="submit" value="DELETE" class="btn btn-primary">
 		</form>
+		</div>
+		<div class="form-group">
 		<form action="editDirectorResult.mvc" method="POST">
 			<input name="directorId" type="hidden" value="${item.id}">
-			<input type="submit" value="Edit">
-		</form>
-		<hr style="text-align: left; margin-left: 0; width: 25%">
-		<br />
+			<input type="submit" value="Edit" class="btn btn-primary">
+		</form></div>
+		</div>
+		</div>
 	</c:forEach>
+		
 	<a href="newDirector.mvc">Add a new Director</a><br />
 	<a href="index.jsp">Home</a>
-	
+
+	</div>
+	</div>
 </body>
 </html>

@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -56,10 +59,11 @@ public class MovieController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/editDirectorResult")
-	public ModelAndView editDirectorDirector(HttpServletRequest request) {
+	@RequestMapping(value = "/editDirectorResult/{id}")
+	public ModelAndView editDirectorDirector(@PathVariable int id) {
 		ModelAndView modelAndView = new ModelAndView();
-		int id = Integer.parseInt(request.getParameter("directorId"));
+		//int id = Integer.parseInt(request.getParameter("directorId"));
+		//Director result = directorDao.searchForDirectorById(id);
 		Director result = directorDao.searchForDirectorById(id);
 		modelAndView.setViewName("editDirector");
 		modelAndView.addObject("director", new Director());
@@ -76,14 +80,14 @@ public class MovieController {
 /*
 * ToDo Create new controller /updateDirector
 */	
-	
-	@RequestMapping(value = "/updateDirector")
-	public ModelAndView updateDirector(Director director, HttpServletRequest request) {
+		
+	@RequestMapping(value = "/updateDirector", method = RequestMethod.POST)
+	public ModelAndView updateDirector(@ModelAttribute("director") Director director) {
 		ModelAndView modelAndView = new ModelAndView();
-		String gender= request.getParameter("gender");
-		System.out.println(gender);
-		//directorDao.update(director);
-		// todo: go to next page.  View all?
+		//String gender= request.getParameter("gender");
+		//System.out.println(gender);
+		directorDao.update(director);
+		changeToDirectorViewAll(modelAndView);
 
 		return modelAndView;
 	}
@@ -137,6 +141,7 @@ public class MovieController {
 	
 	@RequestMapping(value = "/editMovieResult")
 	public ModelAndView editMovie(HttpServletRequest request) {
+		List<Director> directorList = directorDao.getAll();	
 		ModelAndView modelAndView = new ModelAndView();
 		int id = Integer.parseInt(request.getParameter("movieId"));
 		Movie result = movieDao.searchForMovieById(id);
@@ -146,20 +151,25 @@ public class MovieController {
 		modelAndView.addObject("title", result.getTitle());
 		modelAndView.addObject("year", result.getYear());
 		modelAndView.addObject("ratings", Definitions.RATINGS);
-		modelAndView.addObject("genre", result.getGenre());modelAndView.addObject("genres", Definitions.GENRES);modelAndView.addObject("duration", result.getDuration());
-		//modelAndView.addObject("genders", Definitions.GENDERS);
-
-			
+		modelAndView.addObject("genre", result.getGenre());
+		modelAndView.addObject("genres", Definitions.GENRES);
+		modelAndView.addObject("duration", result.getDuration());
+		modelAndView.addObject("allDirectors", directorList);
+					
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/updateMovie")
 	public ModelAndView updateMovie(Movie movie, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		String gender= request.getParameter("gender");
-		System.out.println(gender);
-		//directorDao.update(director);
-		// todo: go to next page.  View all?
+		String title = request.getParameter("title");
+		
+		System.out.println(title);
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		Movie result = movieDao.searchForMovieById(id);
+		movieDao.update(result);
+		changeToMovieViewAll(modelAndView);
 
 		return modelAndView;
 	}

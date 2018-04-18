@@ -12,6 +12,10 @@
 <h2>Edit Director</h2>
 <mvc:form modelAttribute="director" action="updateDirector.mvc">
 	<table>
+	  <tr>
+	        <td><mvc:label path="id">ID: </mvc:label></td>
+	        <td><mvc:input path="id" value="${id}" readonly="readonly"/></td>
+	    </tr>
 	    <tr>
 	        <td><mvc:label path="firstName">First Name: </mvc:label></td>
 	        <td><mvc:input path="firstName" value="${firstName}"/></td>
@@ -23,18 +27,10 @@
 	    <tr>
 	        <td><mvc:label path="address">Address: </mvc:label></td>
 	        <td><mvc:input path="address" value="${address}" /></td>
-	    </tr>
+	    </tr>	         
 	    <tr>
-	        <td><label>Gender: </label></td>
-	         <td><mvc:select path="gender" items="${genders}" /></td>
-<!--          <td>	
-	        	<select name="gender">			
-		        	<c:forEach items="${genders}" var="currentitem">
-						<option value="${currentitem.gender}" ${director.gender == currentitem.gender ? "selected":""}>${currentitem.gender}</option>
-					</c:forEach>
-				</select>
-			</td>
-			-->
+	        <td><mvc:label path="gender">Gender</mvc:label></td>
+	        <td><mvc:select path="gender" items="${genders}" /></td>
 	    </tr>
         <tr>
 	        <td colspan="2">

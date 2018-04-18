@@ -4,45 +4,51 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="head.jsp" %>
 <title>New Movie</title>
 </head>
 <body>
+<div class="container-fluid">
 <h2>Add Movie</h2>
+<div class="row">
+<div class="col-sm-6">
 <mvc:form modelAttribute="movie" action="newMovieResult.mvc" method="POST">
-	<table>
-	    <tr>
-	        <td><mvc:label path="title">Title</mvc:label></td>
-	        <td><mvc:input path="title" /></td>
-	    </tr>
-	    <tr>
-	        <td><mvc:label path="year">Year</mvc:label></td>
-	        <td><mvc:input path="year" /></td>
-	    </tr>
-	    <tr>
-	        <td><mvc:label path="rating">Rating</mvc:label></td>
-	        <td><mvc:select path="rating" items="${ratings}"/></td>
-	    </tr>
-	     <tr>
-	        <td><mvc:label path="genre">Genre</mvc:label></td>
-	        <td><mvc:select path="genre" items="${genres}"/></td>
-	    </tr>
-	    <tr>
-	        <td><mvc:label path="duration">Duration</mvc:label></td>
-	        <td><mvc:input path="duration" /></td>
-	    </tr>
-	     <tr>
-	        <td><mvc:label path="director">Director</mvc:label></td>
-	        <td><mvc:select name="director" path="director" items="${allDirectors}" itemLabel="fullName" itemValue = "id"/></td>
-	    </tr>
-        <tr>
+<div 
+<div class="form-group">
+	        <mvc:label path="title">Title</mvc:label>
+	        <mvc:input path="title" class="form-control" />
+	    </div>
+	    <div class="form-group">
+	        <mvc:label path="year">Year</mvc:label>
+	        <mvc:input path="year" class="form-control"/>
+	    </div>
+	    <div class="form-group">
+	        <mvc:label path="rating">Rating</mvc:label>
+	        <mvc:select path="rating" items="${ratings}" class="form-control"/>
+	    </div>
+	     <div class="form-group">
+	        <mvc:label path="genre">Genre</mvc:label>
+	        <mvc:select path="genre" items="${genres}" class="form-control"/>
+	    </div>
+	   <div class="form-group"> 
+	        <mvc:label path="duration">Duration</mvc:label>
+	        <mvc:input path="duration" class="form-control"/>
+	    </div>
+	<div class="form-group">    
+	        <mvc:label path="director">Director</mvc:label>
+	        <mvc:select name="director" path="director" items="${allDirectors}" itemLabel="fullName" itemValue = "id" class="form-control"/>
+	    </div>
+       <div class="form-group"> 
 	        <td colspan="2">
-                <input type="submit" value="Submit" />
-	        </td>
-	    </tr>
+                <input type="submit" value="Submit" class="btn btn-primary" />
+	      </div>  
+	    
 	</table>  
 </mvc:form>
 <a href = "viewMovies.mvc">View all Movies</a><br />
 <a href = "index.jsp">Home</a>
+</div>
+</div>
+</div>
 </body>
 </html>
