@@ -5,41 +5,53 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@include file="head.jsp" %>
 <title>Edit Director</title>
 </head>
 <body>
+<div class="container-fluid">
 <h2>Edit Director</h2>
+<div class="row">
+<div class="col-sm-6">
 <mvc:form modelAttribute="director" action="updateDirector.mvc">
-	<table>
-	  <tr>
-	        <td><mvc:label path="id">ID: </mvc:label></td>
-	        <td><mvc:input path="id" value="${id}" readonly="readonly"/></td>
-	    </tr>
-	    <tr>
-	        <td><mvc:label path="firstName">First Name: </mvc:label></td>
-	        <td><mvc:input path="firstName" value="${firstName}"/></td>
-	    </tr>
-	    <tr>
-	        <td><mvc:label path="lastName">Last Name: </mvc:label></td>
-	        <td><mvc:input path="lastName" value="${lastName}" /></td>
-	    </tr>
-	    <tr>
-	        <td><mvc:label path="address">Address: </mvc:label></td>
-	        <td><mvc:input path="address" value="${address}" /></td>
-	    </tr>	         
-	    <tr>
-	        <td><mvc:label path="gender">Gender</mvc:label></td>
-	        <td><mvc:select path="gender" items="${genders}" /></td>
-	    </tr>
-        <tr>
-	        <td colspan="2">
-                <input type="submit" value="Submit" />
-	        </td>
-	    </tr>
-	</table>  
+<div class="form-group">
+
+	  
+	        <mvc:label path="id">ID: </mvc:label>
+	        <mvc:input path="id" value="${id}" readonly="readonly" class="form-control"/>
+	    
+	      </div>
+	    <div class="form-group">
+	        <mvc:label path="firstName">First Name: </mvc:label>
+	        <mvc:input path="firstName" value="${firstName}" class="form-control"/>
+	    
+	      </div>
+	    <div class="form-group">
+	        <mvc:label path="lastName">Last Name: </mvc:label>
+	        <mvc:input path="lastName" value="${lastName}" class="form-control" />
+	    
+	      </div>
+	    <div class="form-group">
+	        <mvc:label path="address">Address: </mvc:label>
+	        <mvc:input path="address" value="${address}" class="form-control" />
+	    	         
+	      </div>
+	    <div class="form-group">
+	        <mvc:label path="gender">Gender</mvc:label>
+	        <mvc:select path="gender" items="${genders}" class="form-control" />
+	    
+          </div>
+	    <div class="form-group">
+
+                <input type="submit" value="Submit" class="btn btn-primary" />
+</div>
+	    
+
 </mvc:form>
 <a href = "viewDirectors.mvc">View all Directors</a><br />
 <a href = "index.jsp">Home</a>
+</div>
+</div>
+</div>
 </body>
 </html>

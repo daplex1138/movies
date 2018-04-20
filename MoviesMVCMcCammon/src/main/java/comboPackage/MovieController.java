@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -59,11 +59,27 @@ public class MovieController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/editDirectorResult/{id}")
-	public ModelAndView editDirectorDirector(@PathVariable int id) {
+	@RequestMapping(value = "/updateDirector")
+	public ModelAndView updateDirector(Director director, HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
-		//int id = Integer.parseInt(request.getParameter("directorId"));
-		//Director result = directorDao.searchForDirectorById(id);
+		//String gender= request.getParameter("gender");
+		//System.out.println(gender);
+		directorDao.update(director);
+		changeToDirectorViewAll(modelAndView);
+
+		return modelAndView;
+	}
+
+	
+	
+/*
+* ToDo Create new controller /updateDirector
+*/	
+	
+	@RequestMapping(value = "/editDirectorResult")
+	public ModelAndView editDirectorDirector(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		int id = Integer.parseInt(request.getParameter("directorId"));
 		Director result = directorDao.searchForDirectorById(id);
 		modelAndView.setViewName("editDirector");
 		modelAndView.addObject("director", new Director());
@@ -75,11 +91,6 @@ public class MovieController {
 			
 		return modelAndView;
 	}
-	
-	
-/*
-* ToDo Create new controller /updateDirector
-*/	
 		
 	@RequestMapping(value = "/updateDirector", method = RequestMethod.POST)
 	public ModelAndView updateDirector(@ModelAttribute("director") Director director) {

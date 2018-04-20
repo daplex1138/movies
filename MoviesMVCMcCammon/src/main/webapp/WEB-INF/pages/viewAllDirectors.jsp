@@ -52,6 +52,7 @@
 		</form></div>
 		</div>
 		</div>
+		<br />
 	</c:forEach>
 		
 	<a href="newDirector.mvc">Add a new Director</a><br />

@@ -13,7 +13,7 @@
 <div class="row">
 <div class="col-sm-6">
 <mvc:form modelAttribute="movie" action="newMovieResult.mvc" method="POST">
-<div 
+
 <div class="form-group">
 	        <mvc:label path="title">Title</mvc:label>
 	        <mvc:input path="title" class="form-control" />

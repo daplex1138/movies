@@ -61,7 +61,6 @@
 		</div>
 		</div>
 		</div>
-		<hr style="text-align: left; margin-left: 0; width: 25%">
 		<br />
 	</c:forEach>
 	<a href="newMovie.mvc">Add a new Movie</a><br />

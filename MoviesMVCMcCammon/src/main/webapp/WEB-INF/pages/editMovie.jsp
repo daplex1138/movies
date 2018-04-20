@@ -46,7 +46,6 @@
                 <input type="submit" value="Submit" class="btn btn-primary" />
 	      </div>  
 	    
-	</table>  
 </mvc:form>
 <a href = "viewMovies.mvc">View all Movies</a><br />
 <a href = "index.jsp">Home</a>
